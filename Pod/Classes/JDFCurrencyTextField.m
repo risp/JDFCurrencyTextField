@@ -26,6 +26,7 @@
 @implementation JDFCurrencyTextField
 
 @synthesize locale = _locale;
+@synthesize currencyCode = _currencyCode;
 
 #pragma mark - Setters
 
@@ -57,6 +58,10 @@
     [self formatTextAfterEditing];
 }
 
+- (void)setCurrencyCode:(NSString *)currencyCode {
+    _currencyCode = currencyCode;
+    self.currencyFormatter.currencyCode = currencyCode;
+}
 
 #pragma mark - Getters
 
@@ -68,12 +73,21 @@
     return _locale;
 }
 
+- (NSString *)currencyCode
+{
+    if (!_currencyCode) {
+        _currencyCode = @"EUR";
+    }
+    return _currencyCode;
+}
+
 - (NSNumberFormatter *)currencyFormatter
 {
     if (!_currencyFormatter) {
         _currencyFormatter = [[NSNumberFormatter alloc] init];
         [_currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
         [_currencyFormatter setLocale:self.locale];
+        [_currencyFormatter setCurrencyCode:self.currencyCode];
     }
     return _currencyFormatter;
 }
@@ -84,6 +98,7 @@
         _decimalFormatter = [[NSNumberFormatter alloc] init];
         [_decimalFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
         [_decimalFormatter setLocale:self.locale];
+        [_decimalFormatter setCurrencyCode:self.currencyCode];
     }
     return _decimalFormatter;
 }
