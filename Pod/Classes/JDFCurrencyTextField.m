@@ -167,6 +167,9 @@
     NSNumber *number = [self.decimalFormatter numberFromString:currentString];
     if (number.doubleValue == 0) {
         number = [self.currencyFormatter numberFromString:currentString];
+        if (!number) {
+            number = @0;
+        }
     }
     if (currentString.length == 0) {
         number = @0;
