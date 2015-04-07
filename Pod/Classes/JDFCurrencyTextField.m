@@ -175,7 +175,11 @@
         number = @0;
     }
     
-    super.text = [self.currencyFormatter stringFromNumber:number];
+    if (self.showPlaceHolder && number.intValue == 0) {
+        super.placeholder = [self.currencyFormatter stringFromNumber:number];
+    } else {
+        super.text = [self.currencyFormatter stringFromNumber:number];
+    }
 }
 
 

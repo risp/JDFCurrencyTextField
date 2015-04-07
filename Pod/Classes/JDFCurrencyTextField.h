@@ -27,7 +27,10 @@
 
 /** The currencyCode the the currency value is displayed in. The default is the EUR. If you are going to change this, you should do so before setting the field's text.
  */
-
 @property (nonatomic, strong) NSString *currencyCode;
+
+/** Shows a placeHolder based on the currencyCode
+ */
+@property (nonatomic, assign) BOOL showPlaceHolder;
 
 @end
