@@ -175,7 +175,7 @@
         number = @0;
     }
     
-    if (self.showPlaceHolder && number.intValue == 0) {
+    if (self.showPlaceHolder && number.doubleValue == 0) {
         super.placeholder = [self.currencyFormatter stringFromNumber:number];
     } else {
         super.text = [self.currencyFormatter stringFromNumber:number];
