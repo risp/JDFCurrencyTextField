@@ -19,6 +19,7 @@
 // Delegate
 @property (nonatomic, weak) id<UITextFieldDelegate> realDelegate;
 
+@property (nonatomic, strong) UIToolbar *keyboardToolbar;
 @end
 
 
@@ -140,8 +141,23 @@
     [super setDelegate:self];
     self.keyboardType = UIKeyboardTypeDecimalPad;
     [self formatTextAfterEditing];
+    self.keyboardToolbar = [[UIToolbar alloc] init];
+    self.keyboardToolbar.barStyle = UIBarStyleDefault;
+    self.keyboardToolbar.barTintColor = [UIColor colorWithRed:209/255.0 green:213/255.0 blue:219/255.0 alpha:1.0f];
+    
+    UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    //UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneEditing)];
+    UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"dismiss-keyboard-icon-filled"] style:UIBarButtonItemStylePlain target:self action:@selector(doneEditing)];
+    
+    [self.keyboardToolbar setItems:@[space, done] animated:NO];
+    [self.keyboardToolbar sizeToFit];
+    
+    self.inputAccessoryView = self.keyboardToolbar;
 }
 
+- (void)doneEditing {
+    [self resignFirstResponder];
+}
 
 #pragma mark - Internal
 
